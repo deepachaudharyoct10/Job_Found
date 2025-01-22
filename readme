@@ -1,0 +1,43 @@
+# import libraries 
+# import express
+# call express
+# start the server
+# cookie parser for backend and frontend connection
+# middleware 
+# pass cors  
+# connect database // mongoDb 
+# create models 
+# create controllers
+{
+    "fullname":"Deepa",
+    "email":"deepachaudhar@gamil.com",
+    "phoneNumber":"1234567890",
+    "password":"123456789",
+    "role":"recruiter"
+
+}
+##postman
+create account 
+sign in 
+then call new api
+add newcollection 
+crate a black file
+name according to u
+then check post , get api calls
+selcet post
+then body
+then row
+then json
+
+{
+    "title": "frontend",
+    "description":"frontend develper for my company",
+    "requirements":"reactjs,js",
+    "salary":"12",
+    "location":"delhi",
+    "jobType":"fulltime",
+    "experience":1,
+    "position":12,
+    "companyId":"66de0c25dff68dffa95131e5"
+
+}
