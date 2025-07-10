@@ -1,17 +1,17 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/auth';
+const API_URL = 'http://localhost:7000/api/v1/user';
 
 // Signup function
-export async function signup(userData) {
+export async function signUp(userData) {
   try {
-    const response = await axios.post(`${API_URL}/signup`, userData, {
+    const response = await axios.post(`${API_URL}/register`, userData, {
       headers: {
         'Content-Type': 'application/json',
       },
     });
-    console.log("data is",response.data);
-    return response.data;
+    console.log("data is",response);
+    return response;
   } catch (error) {
     throw error.response ? error.response.data : error;
   }

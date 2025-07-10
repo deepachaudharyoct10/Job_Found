@@ -25,8 +25,8 @@ app.use(cookieParser());
 
 // corse
 const corsOptions= {
-    origin:'http//localhost:5173',
-    credentials:true, //credentials not credentials
+    origin:'http://localhost:5174',
+    credentials:true, //credentials not credential
 }
 
 app.use(cors(corsOptions));
