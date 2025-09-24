@@ -25,7 +25,7 @@ export async function login(credentials) {
         'Content-Type': 'application/json',
       },
     });
-    return response.data;
+    return response;
   } catch (error) {
     throw error.response ? error.response.data : error;
   }

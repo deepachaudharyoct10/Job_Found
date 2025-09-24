@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
+// import { useAuth } from '../contexts/AuthContext';
+import { Eye, EyeOff, Mail, Lock,UserCheck } from 'lucide-react';
+import {login} from '../services/authService'
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: '',
-    password: ''
+    password: '',
+    role:''
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  // const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -27,9 +29,9 @@ const LoginPage = () => {
     setError('');
 
     try {
-      const success = await login(formData.email, formData.password);
-      if (success) {
-        navigate('/');
+      const response = await login(formData);
+      if (response.status ===200) {
+         formData.role ==='student' ?navigate("/student") : navigate("/recruiter")
       } else {
         setError('Invalid email or password');
       }
@@ -40,10 +42,7 @@ const LoginPage = () => {
     }
   };
 
-  const demoCredentials = [
-    { email: 'alex@student.com', password: 'password123', role: 'Student' },
-    { email: 'sarah@company.com', password: 'password123', role: 'Recruiter' }
-  ];
+
 
   return (
     <div className="min-h-screen flex">
@@ -75,7 +74,28 @@ const LoginPage = () => {
                   />
                 </div>
               </div>
-
+              <div>
+                <label
+                  htmlFor="role"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  I am a
+                </label>
+                <div className="relative">
+                  <UserCheck className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <select
+                    id="role"
+                    name="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none"
+                  >
+                    <option>Select a Role</option>
+                    <option value="student">student</option>
+                    <option value="recruiter">recruiter</option>
+                  </select>
+                </div>
+              </div>
               <div>
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                   Password
@@ -128,7 +148,7 @@ const LoginPage = () => {
           </form>
 
           {/* Demo Credentials */}
-          <div className="mt-8 p-4 bg-gray-50 rounded-lg">
+          {/* <div className="mt-8 p-4 bg-gray-50 rounded-lg">
             <h3 className="text-sm font-medium text-gray-900 mb-2">Demo Accounts:</h3>
             <div className="space-y-2">
               {demoCredentials.map((cred, index) => (
@@ -137,7 +157,7 @@ const LoginPage = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
